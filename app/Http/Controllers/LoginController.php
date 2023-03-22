@@ -16,7 +16,7 @@ class LoginController extends Controller
 
         // Authenticate the user
         if (Auth::attempt($credentials)) {
-            dd('login success');
+            return redirect()->route('admin');
         }
 
         dd('login false');
