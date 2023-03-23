@@ -31,5 +31,6 @@ return [
         'payment_methods' => [
             'free' => \Bpuig\Subby\Services\PaymentMethods\Free::class
         ]
-    ]
+    ],
+
 ];
