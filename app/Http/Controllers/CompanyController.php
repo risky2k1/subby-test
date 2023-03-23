@@ -23,13 +23,15 @@ class CompanyController extends Controller
         $company = Company::find($request->input('company_id'));
 
         $plan = Plan::find($request->input('plan'));
-//    dd($company->subscription('main')->isActive());
-        // Subscribe the company to the selected plan
-//            if ($plan === '6-months') {
-////                dd('vao day');
-        if ($company->subscription()->isActive()) {
+
+        $end_at=$company->subscription('main')->getSubscriptionTotalDurationIn('day');
+
+        if ($company->hasActiveSubscription()) {
+
             $company->subscription()->renew();
-        } else($company->newSubscription(
+
+        } else(
+            $company->newSubscription(
             'main', // identifier tag of the subscription. If your application offers a single subscription, you might call this 'main' or 'primary'
             $plan, // Plan or PlanCombination instance your subscriber is subscribing to
             $plan->name, // Human-readable name for your subscription
@@ -38,11 +40,12 @@ class CompanyController extends Controller
             'free' // Payment method service defined in config
         ));
 
-//                dd('plan sub succsses');
-//            } elseif ($plan === '12-months') {
-//                $company->newSubscription('main', '12-months')->create();
-//            }
 
-        return redirect()->route('admin.company.index')->with('success', 'Your subscription has been created.');
+        return redirect()->route('admin.company.index',[
+            'end_at'=>$end_at,
+        ])->with([
+            'success'=> 'Your subscription has been created.',
+            'end_at'=> $end_at,
+        ]);
     }
 }

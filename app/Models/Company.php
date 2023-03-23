@@ -17,9 +17,7 @@ class Company extends Model
      */
     public function hasActiveSubscription()
     {
-//        return $this->subscriptions()
-//                ->isActive()
-//                ->count() > 0;
+
         return $this->subscriptions();
 
     }

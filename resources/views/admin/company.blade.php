@@ -19,10 +19,14 @@
                     @csrf
                     <input type="hidden" name="company_id" value="{{ $company->id }}">
                     <button type="submit" name="plan" value="1">6 Months</button>
-                    <button type="submit" name="plan" value="2">12 Months</button>
+                    <button type="submit" name="plan" value="3">12 Months</button>
                 </form>
             </td>
-        <input type="">
+{{--        <td>--}}
+{{--                @if(session('end_at'))--}}
+{{--                    <p> {{ session('end_at') }}</p>--}}
+{{--                @endif--}}
+{{--        </td>--}}
     </tr>
     @endforeach
 </table>

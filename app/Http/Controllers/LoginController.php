@@ -29,16 +29,16 @@ class LoginController extends Controller
                     'message'=>'Company not found',
                 ]);
             }
-            if($company->hasActiveSubscription()){
-                return back()->withErrors([
-                    'message'=>'Your company hasnt subscribe yet',
-                ]);
-            }
+//            if($company->hasActiveSubscription()){
+//                return back()->withErrors([
+//                    'message'=>'Your company hasnt subscribe yet',
+//                ]);
+//            }
         }
 
         // Authenticate the user
         if (Auth::attempt($credentials)) {
-            return redirect()->route('admin');
+            return redirect()->route('admin.company.index');
         }
 
         return back()->withErrors([
